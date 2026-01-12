@@ -1,8 +1,9 @@
 import sys
-
+import os
 import boto3
 import logging
 from etl.download_dataset import FetchDataset
+from etl.transform import Transformer
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -47,6 +48,10 @@ def main():
     target_file = "downloads/Budgeting sheet.xlsx"
     step1 = FetchDataset(endpoint_url=url, source_file=source_file, target_file=target_file)
     step1.download()
+
+    processed_file_path = 'downloads/income.csv'
+    step2 = Transformer(downloaded_file_path=target_file, processed_file_path=processed_file_path)
+    step2.mapper()
 
 if __name__ == "__main__":
     main()
