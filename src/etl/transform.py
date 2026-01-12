@@ -63,6 +63,7 @@ class Transformer:
             if i == 0:
                 table.columns = ['Category','Amount (₹)','% of Total Income']
                 expense_table = pd.concat([table, expense_table])
+                logger.info(f"Extracted {len(table)} rows")
         expense_table.to_csv(os.path.abspath(self.processed_file_path), index=False)
 
 
