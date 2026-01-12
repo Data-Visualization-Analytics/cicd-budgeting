@@ -2,6 +2,7 @@ import sys
 
 import boto3
 import logging
+from etl.download_dataset import FetchDataset
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -32,15 +33,20 @@ class S3Connector:
             config=self.config,
             region_name=aws_region
         )
-        return s3_client
+        return s3_client, self.url
 
 def main():
 
-    s3_client = S3Connector().connect()
+    s3_client, url = S3Connector().connect()
     response = s3_client.list_objects_v2(Bucket='dataset')
     if 'Contents' in response:
         for obj in response['Contents']:
             print(obj['Key'])
+
+    source_file = "s3://dataset/Budgeting sheet.xlsx"
+    target_file = "downloads/Budgeting sheet.xlsx"
+    step1 = FetchDataset(endpoint_url=url, source_file=source_file, target_file=target_file)
+    step1.download()
 
 if __name__ == "__main__":
     main()
