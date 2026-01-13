@@ -1,9 +1,9 @@
 import sys
-import os
 import boto3
 import logging
 from etl.download_dataset import FetchDataset
 from etl.transform import Transformer
+from etl.uploader import UploadDataset
 
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
@@ -37,7 +37,6 @@ class S3Connector:
         return s3_client, self.url
 
 def main():
-
     s3_client, url = S3Connector().connect()
     response = s3_client.list_objects_v2(Bucket='dataset')
     if 'Contents' in response:
@@ -52,6 +51,10 @@ def main():
     processed_file_path = 'downloads/income.csv'
     step2 = Transformer(downloaded_file_path=target_file, processed_file_path=processed_file_path)
     step2.mapper()
+
+    target_file = "s3://processed-dataset/income.csv"
+    step3 = UploadDataset(processed_file_path=processed_file_path, target_file=target_file)
+    step3.upload_to_s3()
 
 if __name__ == "__main__":
     main()

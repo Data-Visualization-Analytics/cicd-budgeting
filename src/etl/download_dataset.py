@@ -1,6 +1,4 @@
-#download dataset to local path
 import subprocess
-import sys
 import logging
 
 logger = logging.getLogger()
