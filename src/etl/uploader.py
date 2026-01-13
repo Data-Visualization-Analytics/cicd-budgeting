@@ -3,7 +3,7 @@ import subprocess
 
 class UploadDataset:
     def __init__(self,
-                 endpoint_url = "http://localhost:9000",
+                 endpoint_url = "http://host.docker.internal:9000",
                  processed_file_path = "income.csv",
                  target_file = "s3://processed-dataset/income.csv"
                  ):

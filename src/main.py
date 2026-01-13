@@ -12,12 +12,10 @@ logger.addHandler(logging.StreamHandler(sys.stderr))
 
 class S3Connector:
     def __init__(self,
-                 url="http://localhost:9000",
-                 profile_name = "minio"
+                 url="http://host.docker.internal:9000"
                  ):
-        self.profile_name = profile_name
         self.url = url
-        self.session = boto3.Session(profile_name=self.profile_name)
+        self.session = boto3.Session()
         self.credentials = self.session.get_credentials()
         self.access_key = self.credentials.access_key
         self.secret_key = self.credentials.secret_key
