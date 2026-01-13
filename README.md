@@ -1,5 +1,5 @@
 # cicd-budgeting
-create cicd using minio server, jenkins and docker
+Use case: Create a end to end cicd pipeline using minio server, jenkins and docker where we are mimicing to load data from source: s3 bucket and do some transformation on the data and loading the processed data back to a different s3 bucket. This job is automated and run using jenkins pipeline using github webhook
 
 ### step1: setup local jenkins instance or pull jenkins image, also download docker plugins
   documentation: [https://www.jenkins.io/doc/book/installing/]
