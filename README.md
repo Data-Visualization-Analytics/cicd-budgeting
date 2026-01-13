@@ -1,7 +1,7 @@
 # cicd-budgeting
 create cicd using minio server, jenkins and docker
 
-## step1: setup local jenkins instance or pull jenkins image
+## step1: setup local jenkins instance or pull jenkins image, also download docker plugins
   documentation: [https://www.jenkins.io/doc/book/installing/]
 ## step2: setup local minio or docker pull minio image and setup or if you have aws s3 then provide necessary creds
   documentation: [https://docs.min.io/enterprise/aistor-object-store/installation/container/install/]
