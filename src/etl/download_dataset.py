@@ -1,8 +1,4 @@
 import subprocess
-import logging
-
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
 
 class FetchDataset:
     def __init__(self,
